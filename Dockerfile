@@ -53,7 +53,7 @@ RUN cd /tmp/nagios-plugins-2.1.1 && make install
 RUN a2enmod cgi
 
 ADD htpasswd.users /usr/local/nagios/etc/htpasswd.users
-ADD  000-default.conf /etc/apache2/sites-enabled/000-default.conf
+ADD 000-default.conf /etc/apache2/sites-enabled/000-default.conf
 ADD entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]

@@ -12,7 +12,8 @@ RUN apt-get -y install \
     libgd2-xpm-dev \
     libapache2-mod-php5 \
     postfix \
-    unzip
+    unzip \
+    heirloom-mailx
 
 RUN useradd --system --home /usr/local/nagios -M nagios
 RUN groupadd --system nagcmd

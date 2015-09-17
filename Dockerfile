@@ -13,6 +13,8 @@ RUN apt-get update \
 	    postfix \
 	    unzip \
 	    heirloom-mailx \
+	    libssl-dev \
+	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN useradd --system --home /usr/local/nagios -M nagios \
@@ -38,7 +40,7 @@ RUN cd /tmp  \
 	&& cp -R contrib/eventhandlers/ /usr/local/nagios/libexec/ \
 	&& chown -R nagios:nagios /usr/local/nagios/libexec/eventhandlers \
 	&& ln -s /etc/init.d/nagios /etc/rcS.d/S99nagios \
-	&& rm -rf /tmp/nagios-4.1.1
+	&& rm -rf /tmp/nagios-4.1.1*
 	
 
 RUN cd /tmp \
@@ -52,8 +54,19 @@ RUN cd /tmp \
 		--enable-extra-opts \
 	&& make \
 	&& make install \
-	&& rm -rf /tmp/nagios-plugins-2.1.1
+	&& rm -rf /tmp/nagios-plugins-2.1.1*
+RUN cd /tmp \
+	&& wget http://sourceforge.net/projects/nagios/files/nrpe-2.x/nrpe-2.15/nrpe-2.15.tar.gz \
+	&& tar -zxvf nrpe-2.15.tar.gz \
+	&& cd nrpe-2.15 \
+	&& ./configure \
+		--with-ssl=/usr/bin/openssl \
+		--with-ssl-lib=/usr/lib/x86_64-linux-gnu \
+	&& make all \
+	&& make install-plugin \
+	&& rm -rf /tmp/nrpe-2.15*
 
+ 
 RUN a2enmod cgi
 
 ADD htpasswd.users /usr/local/nagios/etc/htpasswd.users

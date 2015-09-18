@@ -20,7 +20,8 @@ RUN apt-get update \
 RUN useradd --system --home /usr/local/nagios -M nagios \
 	&& groupadd --system nagcmd \
 	&& usermod -a -G nagcmd nagios \ 
-	&& usermod -a -G nagcmd www-data
+	&& usermod -a -G nagcmd www-data \
+	&& a2enmod cgi
 
 RUN cd /tmp  \
 	&& wget https://assets.nagios.com/downloads/nagioscore/releases/nagios-4.1.1.tar.gz \
@@ -66,12 +67,7 @@ RUN cd /tmp \
 	&& make install-plugin \
 	&& rm -rf /tmp/nrpe-2.15*
 
- 
-RUN a2enmod cgi
-
-ADD htpasswd.users /usr/local/nagios/etc/htpasswd.users
-ADD 000-default.conf /etc/apache2/sites-enabled/000-default.conf
-ADD entrypoint.sh /entrypoint.sh
+COPY files/root /
 
 EXPOSE 80
 VOLUME /usr/local/nagios/etc/

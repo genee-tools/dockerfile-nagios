@@ -56,16 +56,6 @@ RUN cd /tmp \
 	&& make \
 	&& make install \
 	&& rm -rf /tmp/nagios-plugins-2.1.1*
-RUN cd /tmp \
-	&& wget http://sourceforge.net/projects/nagios/files/nrpe-2.x/nrpe-2.15/nrpe-2.15.tar.gz \
-	&& tar -zxvf nrpe-2.15.tar.gz \
-	&& cd nrpe-2.15 \
-	&& ./configure \
-		--with-ssl=/usr/bin/openssl \
-		--with-ssl-lib=/usr/lib/x86_64-linux-gnu \
-	&& make all \
-	&& make install-plugin \
-	&& rm -rf /tmp/nrpe-2.15*
 
 COPY files/root /
 

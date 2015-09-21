@@ -53,6 +53,7 @@ RUN cd /tmp \
 		--with-nagios-group=nagios \
 		--enable-perl-modules \
 		--enable-extra-opts \
+		--with-ssh-command \
 	&& make \
 	&& make install \
 	&& rm -rf /tmp/nagios-plugins-2.1.1*

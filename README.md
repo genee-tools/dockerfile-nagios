@@ -1,11 +1,7 @@
 # dockerfile-nagios
-赞得一逼的 Dockerfile
 
-**请马上用到生产环境中**
+nagios dockerfile
 
-## 账号/密码
+## Usage
 
-* nagiosadmin
-* nagios
-
-`FROM debian:8` 居然比 `FROM ubuntu:14.04` 大了 80M
+docker run -d --name=nagios -p 80:80 -v /home/nagios/:/usr/local/nagios -v /home/nagios/nail.rc:/etc/nail.rc genee/nagios

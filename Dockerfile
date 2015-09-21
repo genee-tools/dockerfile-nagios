@@ -14,6 +14,7 @@ RUN apt-get update \
 	    unzip \
 	    heirloom-mailx \
 	    libssl-dev \
+	    openssh-client \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/*
 
@@ -53,7 +54,7 @@ RUN cd /tmp \
 		--with-nagios-group=nagios \
 		--enable-perl-modules \
 		--enable-extra-opts \
-		--with-ssh-command \
+		--with-ssh-command=/usr/bin/ssh \
 	&& make \
 	&& make install \
 	&& rm -rf /tmp/nagios-plugins-2.1.1*

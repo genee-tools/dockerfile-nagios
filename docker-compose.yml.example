@@ -1,0 +1,10 @@
+nagios:
+  image: m31271n/nagios
+  ports:
+    - "80:80"
+  environment:
+    - NAGIOSADMIN_PASS=
+    - SLACK_DOMAIN=
+    - SLACK_TOKEN=
+  volumes:
+    - ./etc:/usr/local/nagios/etc

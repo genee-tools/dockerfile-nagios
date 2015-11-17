@@ -1,6 +1,8 @@
 FROM ubuntu:14.04
 ENV DEBIAN_FRONTEND noninteractive
 
+ENV SLACK_NAGIOS_URL https://raw.github.com/tinyspeck/services-examples/master/nagios.pl
+ENV SLACK_NAGIOS /usr/local/bin/slack_nagios.pl
 RUN apt-get update \
     && apt-get -y install wget \
                   build-essential \
@@ -14,8 +16,13 @@ RUN apt-get update \
                   heirloom-mailx \
                   libssl-dev \
                   openssh-client \
-		  supervisor \
+                  supervisor \
+                  libwww-perl \
+                  libcrypt-ssleay-perl \
     && rm -rf /var/lib/apt/lists/*
+
+RUN wget $SLACK_NAGIOS_URL -O $SLACK_NAGIOS
+RUN chmod 755 $SLACK_NAGIOS
 
 RUN useradd --system --home /usr/local/nagios -M nagios \
     && groupadd --system nagcmd \

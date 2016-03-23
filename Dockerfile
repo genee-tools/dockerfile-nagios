@@ -10,9 +10,9 @@ RUN apt-get update \
 	    php5-gd \
 	    libgd2-xpm-dev \
 	    libapache2-mod-php5 \
-	    postfix \
+	    msmtp \
+	    mutt \
 	    unzip \
-	    heirloom-mailx \
 	    libssl-dev \
 	    openssh-client \
 	&& apt-get clean \

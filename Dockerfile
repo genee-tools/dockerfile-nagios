@@ -25,9 +25,9 @@ RUN useradd --system --home /usr/local/nagios -M nagios \
 	&& a2enmod cgi
 
 RUN cd /tmp  \
-	&& wget https://assets.nagios.com/downloads/nagioscore/releases/nagios-4.1.1.tar.gz \
-	&& tar -zxvf nagios-4.1.1.tar.gz \
-	&& cd /tmp/nagios-4.1.1  \
+	&& wget https://assets.nagios.com/downloads/nagioscore/releases/nagios-4.3.1.tar.gz \
+	&& tar -zxvf nagios-4.3.1.tar.gz \
+	&& cd /tmp/nagios-4.3.1  \
 	&& ./configure \
 		--with-nagios-group=nagios \
 		--with-command-group=nagcmd \
@@ -42,13 +42,13 @@ RUN cd /tmp  \
 	&& cp -R contrib/eventhandlers/ /usr/local/nagios/libexec/ \
 	&& chown -R nagios:nagios /usr/local/nagios/libexec/eventhandlers \
 	&& ln -s /etc/init.d/nagios /etc/rcS.d/S99nagios \
-	&& rm -rf /tmp/nagios-4.1.1*
+	&& rm -rf /tmp/nagios-4.3.1*
 	
 
 RUN cd /tmp \
-	&& wget http://www.nagios-plugins.org/download/nagios-plugins-2.1.1.tar.gz \
-	&& tar -zxvf nagios-plugins-2.1.1.tar.gz \
-	&& cd /tmp/nagios-plugins-2.1.1 \
+	&& wget http://www.nagios-plugins.org/download/nagios-plugins-2.2.0.tar.gz \
+	&& tar -zxvf nagios-plugins-2.2.0.tar.gz \
+	&& cd /tmp/nagios-plugins-2.2.0 \
 	&& ./configure \
 		--with-nagios-user=nagios \
 		--with-nagios-group=nagios \
@@ -57,7 +57,7 @@ RUN cd /tmp \
 		--with-ssh-command=/usr/bin/ssh \
 	&& make \
 	&& make install \
-	&& rm -rf /tmp/nagios-plugins-2.1.1*
+	&& rm -rf /tmp/nagios-plugins-2.2.0*
 
 COPY files/root /
 

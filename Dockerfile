@@ -1,5 +1,8 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 ENV DEBIAN_FRONTEND noninteractive
+
+ADD sources.list /etc/apt/sources.list
+RUN rm -rf /etc/apt/sources.list.d/*
 
 RUN apt-get update \
 	&& apt-get -y install \

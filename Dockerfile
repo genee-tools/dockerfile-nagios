@@ -61,7 +61,6 @@ RUN cd /tmp \
 	&& make install \
 	&& rm -rf /tmp/nagios-plugins-2.1.4*
 
-ADD nagios.pl /usr/local/bin/slack_nagios.pl
 RUN chmod 755 /usr/local/bin/slack_nagios.pl
 
 COPY files/root /
